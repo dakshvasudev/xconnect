@@ -14,6 +14,7 @@ class WelcomePage extends GetView<WelcomeController> {
         style: const TextStyle(
           color: AppColors.primaryElementText,
           fontWeight: FontWeight.bold,
+          fontFamily: 'Montserrat',
           fontSize: 45,
         ),
       ),
