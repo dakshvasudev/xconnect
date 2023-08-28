@@ -3,7 +3,7 @@ import 'package:x_connect/pages/frames/welcome/state.dart';
 
 class WelcomeController extends GetxController {
   WelcomeController();
-  final title = "Chatty .";
+  final title = "x connect";
   final state = WelcomeState();
 
   @override

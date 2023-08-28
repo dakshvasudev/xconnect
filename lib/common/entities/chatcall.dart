@@ -26,9 +26,9 @@ class ChatCall {
   });
 
   factory ChatCall.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,
-      ) {
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data();
     return ChatCall(
       from_token: data?['from_token'],

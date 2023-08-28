@@ -1,5 +1,5 @@
-import 'package:chatty/common/entities/entities.dart';
-import 'package:chatty/common/utils/utils.dart';
+import 'package:x_connect/common/entities/entities.dart';
+import 'package:x_connect/common/utils/utils.dart';
 
 class ContactAPI {
   /// 翻页
@@ -10,6 +10,4 @@ class ContactAPI {
     );
     return ContactResponseEntity.fromJson(response);
   }
-
-
 }
