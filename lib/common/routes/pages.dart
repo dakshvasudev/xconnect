@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:x_connect/common/middlewares/router_auth.dart';
+import 'package:x_connect/pages/frames/message/bindings.dart';
+import 'package:x_connect/pages/frames/message/view.dart';
 import 'package:x_connect/pages/frames/welcome/bindings.dart';
 import 'package:x_connect/pages/frames/welcome/view.dart';
 
@@ -16,6 +19,14 @@ class AppPages {
       name: AppRoutes.INITIAL,
       page: () => const WelcomePage(),
       binding: WelcomeBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.Message,
+      page: () => const MessagePage(),
+      binding: MessageBinding(),
+      middlewares: [
+        RouteAuthMiddleware(priority: 1),
+      ],
     ),
     /*
     GetPage(
@@ -42,11 +53,11 @@ class AppPages {
     GetPage(name: AppRoutes.SendCode, page: () => SendCodePage(), binding: SendCodeBinding()),
     // 首页
     GetPage(name: AppRoutes.Contact, page: () => ContactPage(), binding: ContactBinding()),
+    */
     //消息
-    GetPage(name: AppRoutes.Message, page: () => MessagePage(), binding: MessageBinding(),middlewares: [
-       RouteAuthMiddleware(priority: 1),
-     ],),
+
     //我的
+    /*
     GetPage(name: AppRoutes.Profile, page: () => ProfilePage(), binding: ProfileBinding()),
     //聊天详情
     GetPage(name: AppRoutes.Chat, page: () => ChatPage(), binding: ChatBinding()),
