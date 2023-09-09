@@ -4,9 +4,9 @@ import 'package:x_connect/common/store/store.dart';
 
 import 'package:get/get.dart';
 
-/// 检查是否登录
+/// check if the use has logged in
 class RouteAuthMiddleware extends GetMiddleware {
-  // priority 数字小优先级高
+  // priority smaller the better
   @override
   int? priority = 0;
 
@@ -14,13 +14,10 @@ class RouteAuthMiddleware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    if (UserStore.to.isLogin ||
-        route == AppRoutes.SIGN_IN ||
-        route == AppRoutes.INITIAL) {
+    if (UserStore.to.isLogin || route == AppRoutes.SIGN_IN || route == AppRoutes.INITIAL) {
       return null;
     } else {
-      Future.delayed(const Duration(seconds: 2),
-          () => Get.snackbar("Tips", "Login expired, please login again!"));
+      Future.delayed(const Duration(seconds: 2), () => Get.snackbar("Tips", "Login expired, please login again!"));
       return const RouteSettings(name: AppRoutes.SIGN_IN);
     }
   }

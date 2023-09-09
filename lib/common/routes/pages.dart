@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:x_connect/common/middlewares/router_auth.dart';
-import 'package:x_connect/pages/frames/message/bindings.dart';
-import 'package:x_connect/pages/frames/message/view.dart';
+import 'package:x_connect/pages/frames/signin/bindings.dart';
+import 'package:x_connect/pages/frames/signin/view.dart';
 import 'package:x_connect/pages/frames/welcome/bindings.dart';
 import 'package:x_connect/pages/frames/welcome/view.dart';
+import 'package:x_connect/pages/message/bindings.dart';
+import 'package:x_connect/pages/message/view.dart';
 
 import 'routes.dart';
 
@@ -28,13 +30,12 @@ class AppPages {
         RouteAuthMiddleware(priority: 1),
       ],
     ),
-    /*
     GetPage(
       name: AppRoutes.SIGN_IN,
       page: () => SignInPage(),
       binding: SignInBinding(),
     ),
-
+    /*
     // 需要登录
     // GetPage(
     //   name: AppRoutes.Application,

@@ -1,5 +1,5 @@
 import 'package:get/instance_manager.dart';
-import 'package:x_connect/pages/frames/message/controller.dart';
+import 'package:x_connect/pages/message/controller.dart';
 
 class MessageBinding implements Bindings {
   @override
