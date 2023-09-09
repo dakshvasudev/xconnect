@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:x_connect/common/middlewares/router_auth.dart';
-import 'package:x_connect/pages/frames/signin/bindings.dart';
-import 'package:x_connect/pages/frames/signin/view.dart';
-import 'package:x_connect/pages/frames/welcome/bindings.dart';
-import 'package:x_connect/pages/frames/welcome/view.dart';
-import 'package:x_connect/pages/message/bindings.dart';
-import 'package:x_connect/pages/message/view.dart';
+import 'package:x_connect/pages/frames/signin/index.dart';
+import 'package:x_connect/pages/frames/welcome/index.dart';
+import 'package:x_connect/pages/message/index.dart';
 
 import 'routes.dart';
 
