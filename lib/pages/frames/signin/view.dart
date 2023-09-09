@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:x_connect/pages/frames/signin/controller.dart';
+import 'package:get/get.dart';
+import 'package:x_connect/common/values/colors.dart';
+
+import 'index.dart';
 
 class SignInPage extends GetView<SignInController> {
   const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold(
+      backgroundColor: AppColors.primarySecondaryBackground,
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: Text(
+          'Sign in Page',
+        ),
+      ),
+    );
   }
 }

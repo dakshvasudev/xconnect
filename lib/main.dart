@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:x_connect/common/routes/pages.dart';
+import 'package:x_connect/pages/global.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  await Global.init();
+  runApp(MyApp());
+  // firebaseInit().whenComplete(() {
+  //   FirebaseMassagingHandler.config();
+  // });
 }
 
 class MyApp extends StatelessWidget {
