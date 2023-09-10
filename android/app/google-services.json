@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "863530994425",
+    "project_id": "xconnect-935aa",
+    "storage_bucket": "xconnect-935aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863530994425:android:46793b3719da278a66b028",
+        "android_client_info": {
+          "package_name": "com.example.x_connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNbTm8PDZhV-1kccKbduq38A0hBWnJjqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
