@@ -26,40 +26,39 @@ class SignInPage extends GetView<SignInController> {
         child: Container(
           width: 295,
           height: 44,
-          margin: EdgeInsets.only(bottom: 15),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 15),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppColors.primaryBackground,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1), // changes position of shadow
               ),
             ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(padding: EdgeInsets.only(left: 40, right: 30), child: Image.asset("assets/icons/google.png")),
               Container(
-                child: Text(
-                  "Sign in with Google",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primaryText,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
+                  padding: const EdgeInsets.only(left: 40, right: 30), child: Image.asset("assets/icons/google.png")),
+              const Text(
+                "Sign in with Google",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primaryText,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
                 ),
               ),
             ],
           ),
         ),
         onTap: () {
-          // controller.handleSignIn("google");
+          controller.handleSignIn("google");
         });
   }
 
@@ -68,33 +67,32 @@ class SignInPage extends GetView<SignInController> {
         child: Container(
           width: 295,
           height: 44,
-          margin: EdgeInsets.only(bottom: 15),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 15),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppColors.primaryBackground,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1), // changes position of shadow
               ),
             ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(padding: EdgeInsets.only(left: 40, right: 30), child: Image.asset("assets/icons/facebook.png")),
               Container(
-                child: Text(
-                  "Sign in with Facebook",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primaryText,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
+                  padding: const EdgeInsets.only(left: 40, right: 30), child: Image.asset("assets/icons/facebook.png")),
+              const Text(
+                "Sign in with Facebook",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primaryText,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -110,33 +108,32 @@ class SignInPage extends GetView<SignInController> {
         child: Container(
           width: 295,
           height: 44,
-          margin: EdgeInsets.only(bottom: 15),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 15),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppColors.primaryBackground,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1), // changes position of shadow
               ),
             ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(padding: EdgeInsets.only(left: 40, right: 30), child: Image.asset("assets/icons/apple.png")),
               Container(
-                child: Text(
-                  "Sign in with Apple",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primaryText,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
+                  padding: const EdgeInsets.only(left: 40, right: 30), child: Image.asset("assets/icons/apple.png")),
+              const Text(
+                "Sign in with Apple",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primaryText,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -152,32 +149,30 @@ class SignInPage extends GetView<SignInController> {
         child: Container(
           width: 295,
           height: 44,
-          margin: EdgeInsets.only(bottom: 40),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 40),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppColors.primaryBackground,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1), // changes position of shadow
               ),
             ],
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                child: Text(
-                  "Sign in with phone number",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primaryText,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
+              Text(
+                "Sign in with phone number",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primaryText,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -202,8 +197,8 @@ class SignInPage extends GetView<SignInController> {
             _buildThirdPartyFacebookLogin(),
             _buildThirdPartyAppleLogin(),
             Container(
-              margin: EdgeInsets.only(top: 20, bottom: 35),
-              child: Row(children: <Widget>[
+              margin: const EdgeInsets.only(top: 20, bottom: 35),
+              child: const Row(children: <Widget>[
                 Expanded(
                     child: Divider(
                   height: 2,
@@ -223,32 +218,28 @@ class SignInPage extends GetView<SignInController> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: Text(
-                    "Already have an account?",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.primaryText,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12,
-                    ),
+                const Text(
+                  "Already have an account?",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.primaryText,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 12,
                   ),
                 ),
-                Container(
-                  child: GestureDetector(
-                      child: Text(
-                        "Sign up here ",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColors.primaryElement,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 12,
-                        ),
+                GestureDetector(
+                    child: const Text(
+                      "Sign up here ",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.primaryElement,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
                       ),
-                      onTap: () {
-                        // controller.handleSignIn("email");
-                      }),
-                ),
+                    ),
+                    onTap: () {
+                      // controller.handleSignIn("email");
+                    }),
               ],
             )
           ],
