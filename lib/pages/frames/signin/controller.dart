@@ -1,7 +1,13 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:x_connect/common/apis/apis.dart';
 import 'package:x_connect/common/entities/entities.dart';
+import 'package:x_connect/common/routes/routes.dart';
+import 'package:x_connect/common/store/store.dart';
+import 'package:x_connect/common/widgets/widgets.dart';
 import 'package:x_connect/pages/frames/signin/state.dart';
 
 class SignInController extends GetxController {
@@ -30,6 +36,7 @@ class SignInController extends GetxController {
           loginPanelListRequestEntity.avatar = photoUrl;
           loginPanelListRequestEntity.open_id = id;
           loginPanelListRequestEntity.type = 2;
+          asyncPostAllData();
         }
       } else {
         if (kDebugMode) {
@@ -41,5 +48,19 @@ class SignInController extends GetxController {
         print('-----error with login $e-----');
       }
     }
+  }
+
+  // asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
+  asyncPostAllData() {
+    // EasyLoading.show(indicator: const CircularProgressIndicator(),maskType: EasyLoadingMaskType.clear,dismissOnTap: true);
+    // var result = await UserAPI.Login(params: loginRequestEntity);
+    // print(result);
+    // if(result.code==0){
+    //   await UserStore.to.saveProfile(result.data!);
+    //   EasyLoading.dismiss();
+    Get.offAllNamed(AppRoutes.Message);
+    // }else{
+    //   EasyLoading.dismiss();
+    //   toastInfo(msg: 'internet error');
   }
 }
