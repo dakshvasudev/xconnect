@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:x_connect/common/values/colors.dart';
-import 'package:x_connect/pages/frames/welcome/index.dart';
+import 'package:x_connect/pages/profile/controller.dart';
 
-class ProfilePage extends GetView<WelcomeController> {
+class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({super.key});
 
   AppBar _buildAppBar() {
@@ -76,32 +76,30 @@ class ProfilePage extends GetView<WelcomeController> {
         child: Container(
           width: 295,
           height: 44,
-          margin: EdgeInsets.only(top: 60, bottom: 30),
-          padding: EdgeInsets.all(0),
+          margin: const EdgeInsets.only(top: 60, bottom: 30),
+          padding: const EdgeInsets.all(0),
           decoration: BoxDecoration(
             color: AppColors.primaryElement,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1), // changes position of shadow
               ),
             ],
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                child: Text(
-                  "Complete",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primaryElementText,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
+              Text(
+                "Complete",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primaryElementText,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -117,32 +115,30 @@ class ProfilePage extends GetView<WelcomeController> {
         child: Container(
           width: 295,
           height: 44,
-          margin: EdgeInsets.only(top: 0, bottom: 30),
-          padding: EdgeInsets.all(0),
+          margin: const EdgeInsets.only(top: 0, bottom: 30),
+          padding: const EdgeInsets.all(0),
           decoration: BoxDecoration(
             color: AppColors.primarySecondaryElementText,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1), // changes position of shadow
               ),
             ],
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                child: Text(
-                  "Logout",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primaryElementText,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
+              Text(
+                "Logout",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primaryElementText,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -153,7 +149,7 @@ class ProfilePage extends GetView<WelcomeController> {
             title: "Are you sure to log out?",
             content: Container(),
             onConfirm: () {
-              // controller.goLogout();
+              controller.goLogout();
             },
             onCancel: () {},
             textConfirm: "Confirm",

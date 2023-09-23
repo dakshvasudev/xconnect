@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:x_connect/common/routes/routes.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:x_connect/common/store/user.dart';
 import 'package:x_connect/pages/profile/state.dart';
 
 class ProfileController extends GetxController {
@@ -7,9 +8,8 @@ class ProfileController extends GetxController {
   final title = "Xconnect";
   final state = ProfileState();
 
-  @override
-  void onReady() {
-    super.onReady();
-    Future.delayed(const Duration(seconds: 3), () => Get.offAllNamed(AppRoutes.Message));
+  goLogout() async {
+    await GoogleSignIn().signOut();
+    await UserStore.to.onLogout();
   }
 }
