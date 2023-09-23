@@ -10,7 +10,7 @@ class MessagePage extends GetView<MessageController> {
     return Container(
       width: 320,
       height: 44,
-      margin: EdgeInsets.only(bottom: 20, top: 20),
+      margin: const EdgeInsets.only(bottom: 20, top: 20),
       child: Row(
         children: [
           Stack(
@@ -36,6 +36,23 @@ class MessagePage extends GetView<MessageController> {
                           fit: BoxFit.fill,
                         )
                       : Text('Hi'),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                height: 14,
+                child: Container(
+                  width: 14,
+                  height: 14,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.primaryElementText,
+                      width: 2,
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    color: AppColors.primaryElementStatus,
+                  ),
                 ),
               )
             ],
