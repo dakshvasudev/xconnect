@@ -16,6 +16,9 @@ class MessagePage extends GetView<MessageController> {
           Stack(
             children: [
               GestureDetector(
+                onTap: () {
+                  controller.goProfile();
+                },
                 child: Container(
                   height: 44,
                   width: 44,

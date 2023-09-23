@@ -5,6 +5,7 @@ import 'package:x_connect/common/middlewares/router_auth.dart';
 import 'package:x_connect/pages/frames/signin/index.dart';
 import 'package:x_connect/pages/frames/welcome/index.dart';
 import 'package:x_connect/pages/message/index.dart';
+import 'package:x_connect/pages/profile/index.dart';
 
 import 'routes.dart';
 
@@ -32,6 +33,8 @@ class AppPages {
       page: () => SignInPage(),
       binding: SignInBinding(),
     ),
+    GetPage(name: AppRoutes.Profile, page: () => ProfilePage(), binding: ProfileBinding()),
+
     /*
     // 需要登录
     // GetPage(
@@ -56,7 +59,6 @@ class AppPages {
 
     //我的
     /*
-    GetPage(name: AppRoutes.Profile, page: () => ProfilePage(), binding: ProfileBinding()),
     //聊天详情
     GetPage(name: AppRoutes.Chat, page: () => ChatPage(), binding: ChatBinding()),
 
