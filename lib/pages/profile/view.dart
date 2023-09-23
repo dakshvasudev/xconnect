@@ -125,7 +125,7 @@ class ProfilePage extends GetView<ProfileController> {
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: const Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1),
               ),
             ],
           ),
