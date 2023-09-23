@@ -8,7 +8,7 @@ class MessagePage extends GetView<MessageController> {
 
   Widget _headBar() {
     return Container(
-      width: 320,
+      width: 380,
       height: 44,
       margin: const EdgeInsets.only(bottom: 20, top: 20),
       child: Row(
