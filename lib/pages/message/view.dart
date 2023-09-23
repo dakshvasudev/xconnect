@@ -6,10 +6,10 @@ import 'package:x_connect/pages/message/controller.dart';
 class MessagePage extends GetView<MessageController> {
   const MessagePage({super.key});
 
-  Widget _headBar() {
+  Widget _headBar(double width) {
     return Container(
-      width: 380,
-      height: 44,
+      width: width,
+      height: 60,
       margin: const EdgeInsets.only(bottom: 20, top: 20),
       child: Row(
         children: [
@@ -20,8 +20,8 @@ class MessagePage extends GetView<MessageController> {
                   controller.goProfile();
                 },
                 child: Container(
-                  height: 44,
-                  width: 44,
+                  height: 50,
+                  width: 50,
                   decoration: BoxDecoration(
                       color: AppColors.primarySecondaryBackground,
                       borderRadius: const BorderRadius.all(Radius.circular(22)),
@@ -75,7 +75,7 @@ class MessagePage extends GetView<MessageController> {
               slivers: [
                 SliverAppBar(
                   pinned: true,
-                  title: _headBar(),
+                  title: _headBar(MediaQuery.of(context).size.width),
                 ),
               ],
             )
