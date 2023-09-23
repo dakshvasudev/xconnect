@@ -18,13 +18,117 @@ class ProfilePage extends GetView<WelcomeController> {
     );
   }
 
+  Widget _buildProfilePhoto() {
+    return Stack(
+      children: [
+        Container(
+          height: 120,
+          width: 120,
+          decoration: BoxDecoration(
+            color: AppColors.primarySecondaryBackground,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(60),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: const Image(
+            image: AssetImage('assets/images/account_header.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: GestureDetector(
+            child: Container(
+              height: 35,
+              width: 35,
+              decoration: const BoxDecoration(
+                color: AppColors.primaryElement,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(40),
+                ),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildCompleteBtn() {
+    return GestureDetector(
+        child: Container(
+          width: 295,
+          height: 44,
+          margin: EdgeInsets.only(top: 60, bottom: 30),
+          padding: EdgeInsets.all(0),
+          decoration: BoxDecoration(
+            color: AppColors.primaryElement,
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(0, 1), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: Text(
+                  "Complete",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.primaryElementText,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        onTap: () {
+          // controller.goSave();
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
       body: SafeArea(
         child: CustomScrollView(
-          slivers: [],
+          slivers: [
+            SliverToBoxAdapter(
+              child: Container(
+                child: Column(
+                  children: [
+                    _buildProfilePhoto(),
+                    _buildCompleteBtn(),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
