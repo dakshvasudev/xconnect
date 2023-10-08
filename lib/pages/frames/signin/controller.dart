@@ -62,6 +62,7 @@ class SignInController extends GetxController {
     print('-----------response-----------');
     var response = await HttpUtil().get('/api/index');
     print(response);
+    UserStore.to.setIsLogin = true;
     Get.offAllNamed(AppRoutes.Message);
     // }else{
     //   EasyLoading.dismiss();
