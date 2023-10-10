@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -37,7 +39,9 @@ class SignInController extends GetxController {
           loginPanelListRequestEntity.avatar = photoUrl;
           loginPanelListRequestEntity.open_id = id;
           loginPanelListRequestEntity.type = 2;
-          asyncPostAllData();
+          print('------------json encode loginPanelListRequestEntity---------');
+          print(jsonEncode(loginPanelListRequestEntity));
+          asyncPostAllData(loginPanelListRequestEntity);
         }
       } else {
         if (kDebugMode) {
@@ -51,18 +55,17 @@ class SignInController extends GetxController {
     }
   }
 
-  // asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
-  asyncPostAllData() async {
+  asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
     // EasyLoading.show(indicator: const CircularProgressIndicator(),maskType: EasyLoadingMaskType.clear,dismissOnTap: true);
-    // var result = await UserAPI.Login(params: loginRequestEntity);
-    // print(result);
+    var result = await UserAPI.Login(params: loginRequestEntity);
+    print('------------result loginRequestEntity----------');
+    print(result);
     // if(result.code==0){
     //   await UserStore.to.saveProfile(result.data!);
     //   EasyLoading.dismiss();
-    print('-----------response-----------');
-    var response = await HttpUtil().get('/api/index');
-    print(response);
-    UserStore.to.setIsLogin = true;
+    // print('-----------response-----------');
+    // var response = await HttpUtil().get('/api/index');
+    // print(response);
     Get.offAllNamed(AppRoutes.Message);
     // }else{
     //   EasyLoading.dismiss();
