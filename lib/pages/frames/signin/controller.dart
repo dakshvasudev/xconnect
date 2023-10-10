@@ -56,19 +56,21 @@ class SignInController extends GetxController {
   }
 
   asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
-    // EasyLoading.show(indicator: const CircularProgressIndicator(),maskType: EasyLoadingMaskType.clear,dismissOnTap: true);
+    EasyLoading.show(
+        indicator: const CircularProgressIndicator(), maskType: EasyLoadingMaskType.clear, dismissOnTap: true);
     var result = await UserAPI.Login(params: loginRequestEntity);
     print('------------result loginRequestEntity----------');
     print(result);
-    // if(result.code==0){
-    //   await UserStore.to.saveProfile(result.data!);
-    //   EasyLoading.dismiss();
-    // print('-----------response-----------');
-    // var response = await HttpUtil().get('/api/index');
-    // print(response);
+    if (result.code == 0) {
+      print('-----result code is 0---------');
+      await UserStore.to.saveProfile(result.data!);
+      print('------task complete-------');
+      EasyLoading.dismiss();
+    } else {
+      print('------error-------');
+      EasyLoading.dismiss();
+      toastInfo(msg: 'internet error');
+    }
     Get.offAllNamed(AppRoutes.Message);
-    // }else{
-    //   EasyLoading.dismiss();
-    //   toastInfo(msg: 'internet error');
   }
 }
