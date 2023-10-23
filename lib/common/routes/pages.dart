@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:x_connect/common/middlewares/router_auth.dart';
 import 'package:x_connect/pages/frames/signin/index.dart';
+import 'package:x_connect/pages/contact/index.dart';
 import 'package:x_connect/pages/frames/welcome/index.dart';
 import 'package:x_connect/pages/message/index.dart';
 import 'package:x_connect/pages/profile/index.dart';
@@ -34,7 +35,7 @@ class AppPages {
       binding: SignInBinding(),
     ),
     GetPage(name: AppRoutes.Profile, page: () => ProfilePage(), binding: ProfileBinding()),
-
+    GetPage(name: AppRoutes.Contact, page: () => ContactPage(), binding: ContactBinding()),
     /*
     // 需要登录
     // GetPage(
@@ -53,7 +54,7 @@ class AppPages {
     GetPage(name: AppRoutes.Phone, page: () => PhonePage(), binding: PhoneBinding()),
     GetPage(name: AppRoutes.SendCode, page: () => SendCodePage(), binding: SendCodeBinding()),
     // 首页
-    GetPage(name: AppRoutes.Contact, page: () => ContactPage(), binding: ContactBinding()),
+
     */
     //消息
 
