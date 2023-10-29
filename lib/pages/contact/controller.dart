@@ -40,6 +40,46 @@ class ContactController extends GetxController {
         .where("from_token", isEqualTo: contactItem.token)
         .where("to_token", isEqualTo: token)
         .get();
+    if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
+      if (kDebugMode) {
+        print("----from_messages--to_messages--empty--");
+      }
+      var profile = UserStore.to.profile;
+      var msgdata = Msg(
+        from_token: profile.token,
+        to_token: contactItem.token,
+        from_name: profile.name,
+        to_name: contactItem.name,
+        from_avatar: profile.avatar,
+        to_avatar: contactItem.avatar,
+        from_online: profile.online,
+        to_online: contactItem.online,
+        last_msg: "",
+        last_time: Timestamp.now(),
+        msg_num: 0,
+      );
+      var doc_id = await db
+          .collection("message")
+          .withConverter(
+            fromFirestore: Msg.fromFirestore,
+            toFirestore: (Msg msg, options) => msg.toFirestore(),
+          )
+          .add(msgdata);
+      // Get.offAndToNamed("/chat", parameters: {
+      //   "doc_id": doc_id.id,
+      //   "to_token": contactItem.token ?? "",
+      //   "to_name": contactItem.name ?? "",
+      //   "to_avatar": contactItem.avatar ?? "",
+      //   "to_online": contactItem.online.toString()
+      // });
+      if (kDebugMode) {
+        print('----------creating new document and adding user info done------');
+      }
+    } else {
+      if (kDebugMode) {
+        print('----------users are older-----');
+      }
+    }
   }
 
   asyncLoadAllData() async {
