@@ -31,6 +31,9 @@ class ContactController extends GetxController {
         .where("from_token", isEqualTo: token)
         .where("to_token", isEqualTo: contactItem.token)
         .get();
+
+    print('-------from messages---------');
+    print(from_messages.docs.isNotEmpty);
     var to_messages = await db
         .collection("message")
         .withConverter(
@@ -40,6 +43,8 @@ class ContactController extends GetxController {
         .where("from_token", isEqualTo: contactItem.token)
         .where("to_token", isEqualTo: token)
         .get();
+    print('-------to messages---------');
+    print(to_messages.docs.isNotEmpty);
     if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
       if (kDebugMode) {
         print("----from_messages--to_messages--empty--");
@@ -65,19 +70,38 @@ class ContactController extends GetxController {
             toFirestore: (Msg msg, options) => msg.toFirestore(),
           )
           .add(msgdata);
-      // Get.offAndToNamed("/chat", parameters: {
-      //   "doc_id": doc_id.id,
-      //   "to_token": contactItem.token ?? "",
-      //   "to_name": contactItem.name ?? "",
-      //   "to_avatar": contactItem.avatar ?? "",
-      //   "to_online": contactItem.online.toString()
-      // });
+      Get.offAndToNamed("/chat", parameters: {
+        "doc_id": doc_id.id,
+        "to_token": contactItem.token ?? "",
+        "to_name": contactItem.name ?? "",
+        "to_avatar": contactItem.avatar ?? "",
+        "to_online": contactItem.online.toString()
+      });
       if (kDebugMode) {
         print('----------creating new document and adding user info done------');
       }
     } else {
-      if (kDebugMode) {
-        print('----------users are older-----');
+      if (!from_messages.docs.isEmpty) {
+        print("---from_messages");
+        print(from_messages.docs.first.id);
+        Get.toNamed("/chat", parameters: {
+          "doc_id": from_messages.docs.first.id,
+          "to_token": contactItem.token ?? "",
+          "to_name": contactItem.name ?? "",
+          "to_avatar": contactItem.avatar ?? "",
+          "to_online": contactItem.online.toString()
+        });
+      }
+      if (!to_messages.docs.isEmpty) {
+        print("---to_messages");
+        print(to_messages.docs.first.id);
+        Get.toNamed("/chat", parameters: {
+          "doc_id": to_messages.docs.first.id,
+          "to_token": contactItem.token ?? "",
+          "to_name": contactItem.name ?? "",
+          "to_avatar": contactItem.avatar ?? "",
+          "to_online": contactItem.online.toString()
+        });
       }
     }
   }
