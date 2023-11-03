@@ -52,7 +52,7 @@ class ContactList extends GetView<ContactController> {
               ),
               //
               Container(
-                width: 275,
+                width: 280,
                 padding: const EdgeInsets.only(top: 15, left: 10, right: 0, bottom: 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
