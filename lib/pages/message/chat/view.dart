@@ -91,7 +91,6 @@ class ChatPage extends GetView<ChatController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryElement,
       appBar: _buildAppBar(),
       body: Obx(() => SafeArea(
               child: ConstrainedBox(
@@ -269,7 +268,7 @@ class ChatPage extends GetView<ChatController> {
                                   ),
                                   child: Image.asset("assets/icons/call.png")),
                               onTap: () {
-                                // controller.callAudio();
+                                controller.callAudio();
                               },
                             ),
                             GestureDetector(

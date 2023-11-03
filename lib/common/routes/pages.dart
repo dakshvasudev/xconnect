@@ -7,6 +7,7 @@ import 'package:x_connect/pages/contact/index.dart';
 import 'package:x_connect/pages/frames/welcome/index.dart';
 import 'package:x_connect/pages/message/chat/index.dart';
 import 'package:x_connect/pages/message/index.dart';
+import 'package:x_connect/pages/message/voicecall/index.dart';
 import 'package:x_connect/pages/profile/index.dart';
 
 import 'routes.dart';
@@ -38,6 +39,7 @@ class AppPages {
     GetPage(name: AppRoutes.Profile, page: () => ProfilePage(), binding: ProfileBinding()),
     GetPage(name: AppRoutes.Contact, page: () => ContactPage(), binding: ContactBinding()),
     GetPage(name: AppRoutes.Chat, page: () => ChatPage(), binding: ChatBinding()),
+    GetPage(name: AppRoutes.VoiceCall, page: () => VoiceCallPage(), binding: VoiceCallBinding()),
 
     /*
     // 需要登录
@@ -66,7 +68,6 @@ class AppPages {
     //聊天详情
 
     GetPage(name: AppRoutes.Photoimgview, page: () => PhotoImgViewPage(), binding: PhotoImgViewBinding()),
-    GetPage(name: AppRoutes.VoiceCall, page: () => VoiceCallViewPage(), binding: VoiceCallViewBinding()),
     GetPage(name: AppRoutes.VideoCall, page: () => VideoCallPage(), binding: VideoCallBinding()),*/
   ];
 }

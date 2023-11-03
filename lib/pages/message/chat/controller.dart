@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:x_connect/common/routes/names.dart';
 import 'package:x_connect/pages/message/chat/state.dart';
 
 class ChatController extends GetxController {
@@ -7,6 +8,17 @@ class ChatController extends GetxController {
   late String doc_id;
   goMore() {
     state.more_status.value = state.more_status.value ? false : true;
+  }
+
+  callAudio() async {
+    state.more_status.value = false;
+    Get.toNamed(AppRoutes.VoiceCall, parameters: {
+      "doc_id": doc_id,
+      "to_token": state.to_token.value,
+      "to_name": state.to_name.value,
+      "to_avatar": state.to_avatar.value,
+      "call_role": "anchor"
+    });
   }
 
   @override
