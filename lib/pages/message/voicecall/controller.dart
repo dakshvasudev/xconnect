@@ -167,6 +167,12 @@ class VoiceCallController extends GetxController {
   }
 
   @override
+  void onClose() {
+    super.onClose();
+    _dispose();
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _dispose();
