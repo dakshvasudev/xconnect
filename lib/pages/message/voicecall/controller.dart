@@ -1,13 +1,17 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:x_connect/common/store/user.dart';
 import 'package:x_connect/common/values/server.dart';
 import 'package:x_connect/pages/message/voicecall/index.dart';
 
 class VoiceCallController extends GetxController {
   VoiceCallController();
+
   final state = VoiceCallState();
   final player = AudioPlayer();
   String appId = APPID;
@@ -15,6 +19,7 @@ class VoiceCallController extends GetxController {
   final db = FirebaseFirestore.instance;
   final profile_token = UserStore.to.profile.token;
   late final RtcEngine engine;
+  ChannelProfileType channelProfileType = ChannelProfileType.channelProfileCommunication;
 
   @override
   void onInit() {
@@ -82,27 +87,88 @@ class VoiceCallController extends GetxController {
         //     // callTime();
         //     // is_calltimer = true;
         //   }
-        // },
-        // onRtcStats: (RtcConnection connection, RtcStats stats) {
-        //   print("time----- ");
-        //   print(stats.duration);
-        // },
-        // onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
-        //   print("---onUserOffline----- ");
       },
+      onRtcStats: (RtcConnection connection, RtcStats stats) {
+        print("time----- ");
+        print(stats.duration);
+      },
+      // onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+      //   print("---onUserOffline----- ");
+      // },
     ));
     //
-    // await engine.enableAudio();
-    // await engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
-    // await engine.setAudioProfile(
-    //   profile: AudioProfileType.audioProfileDefault,
-    //   scenario: AudioScenarioType.audioScenarioGameStreaming,
-    // );
+    await engine.enableAudio();
+    await engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+    await engine.setAudioProfile(
+      profile: AudioProfileType.audioProfileDefault,
+      scenario: AudioScenarioType.audioScenarioGameStreaming,
+    );
     // // is anchor joinChannel
-    // await joinChannel();
+    await joinChannel();
     // if (state.call_role == "anchor") {
     //   await sendNotifications("voice");
     //   await player.play();
     // }
+  }
+
+  joinChannel() async {
+    await Permission.microphone.request();
+
+    EasyLoading.show(indicator: CircularProgressIndicator(), maskType: EasyLoadingMaskType.clear, dismissOnTap: true);
+    // String token = await getToken();
+    // if (token.isEmpty) {
+    //   EasyLoading.dismiss();
+    //   Get.back();
+    //   return;
+    // }
+    await engine.joinChannel(
+        token:
+            "007eJxTYLh+a4+x4ToelgkLSlfrT/+8PVDs5/Mdp84uYqg8cc6fL5lJgcEkzdLQwszc0sTC0NTE1CQ1ydw01czUyNLMMNnQwNjImPO7a2pDICPDRgYWFkYGCATx+RgqkvPz8lKTS3RL8rNT8xgYAIZ0IeQ=",
+        channelId: "xconnect-token",
+        uid: 0,
+        options: ChannelMediaOptions(
+          channelProfile: channelProfileType,
+          clientRoleType: ClientRoleType.clientRoleBroadcaster,
+        ));
+    // if (state.call_role == "audience") {
+    //   callTime();
+    //   is_calltimer = true;
+    // }
+    EasyLoading.dismiss();
+  }
+
+  leaveChannel() async {
+    EasyLoading.show(
+        indicator: const CircularProgressIndicator(), maskType: EasyLoadingMaskType.clear, dismissOnTap: true);
+    await player.pause();
+    // await sendNotifications("cancel");
+    //  await engine.leaveChannel();
+    state.isJoined.value = false;
+    // state.openMicrophone.value = true;
+    // state.enableSpeakerphone.value = true;
+    EasyLoading.dismiss();
+    // if (Get.isSnackbarOpen) {
+    //   Get.closeAllSnackbars();
+    // }
+    Get.back();
+  }
+
+  Future<void> _dispose() async {
+    // if (is_calltimer) {
+    //   calltimer.cancel();
+    // }
+    // if (state.call_role == "anchor") {
+    //   addCallTime();
+    // }
+    await player.pause();
+    await engine.leaveChannel();
+    await engine.release();
+    await player.stop();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _dispose();
   }
 }
