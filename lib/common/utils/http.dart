@@ -102,7 +102,7 @@ class HttpUtil {
         EasyLoading.showError(eInfo.message);
         break;
       default:
-        EasyLoading.showError('未知错误');
+        EasyLoading.showError('unknown error');
         break;
     }
   }
