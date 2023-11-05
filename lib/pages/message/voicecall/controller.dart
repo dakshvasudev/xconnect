@@ -111,9 +111,28 @@ class VoiceCallController extends GetxController {
     // // is anchor joinChannel
     await joinChannel();
     if (state.call_role == "anchor") {
-      // await sendNotifications("voice");
+      await sendNotifications("voice");
       await player.play();
     }
+  }
+
+  sendNotifications(String call_type) async {
+    CallRequestEntity callRequestEntity = CallRequestEntity();
+    callRequestEntity.call_type = call_type;
+    callRequestEntity.to_token = state.to_token.value;
+    callRequestEntity.to_avatar = state.to_avatar.value;
+    callRequestEntity.doc_id = state.doc_id.value;
+    callRequestEntity.to_name = state.to_name.value;
+    print('------the other user\'s token is ${state.to_token.value}');
+    // var res = await ChatAPI.call_notifications(params: callRequestEntity);
+    // print(res);
+    // if (res.code == 0) {
+    //   print("sendNotifications success");
+    // } else {
+    //   print("could not send notification");
+    //   // Get.snackbar("Tips", "Notification error!");
+    //   // Get.offAllNamed(AppRoutes.Message);
+    // }
   }
 
   Future<String> getToken() async {

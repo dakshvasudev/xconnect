@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -39,10 +40,27 @@ class ProfilePage extends GetView<ProfileController> {
               ),
             ],
           ),
-          child: const Image(
-            image: AssetImage('assets/images/account_header.png'),
-            fit: BoxFit.fill,
-          ),
+          child: controller.state.profile_detail.value.avatar != null
+              ? CachedNetworkImage(
+                  imageUrl: controller.state.profile_detail.value.avatar!,
+                  height: 120,
+                  width: 120,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(60)),
+                      image: DecorationImage(image: imageProvider, fit: BoxFit.fill
+                          // colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+                          ),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => const Image(
+                    image: AssetImage('assets/images/account_header.png'),
+                  ),
+                )
+              : const Image(
+                  image: AssetImage('assets/images/account_header.png'),
+                  fit: BoxFit.fill,
+                ),
         ),
         Positioned(
           right: 0,

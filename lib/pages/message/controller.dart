@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:x_connect/common/routes/routes.dart';
+import 'package:x_connect/common/store/user.dart';
 import 'package:x_connect/pages/message/state.dart';
 
 class MessageController extends GetxController {
@@ -12,6 +13,19 @@ class MessageController extends GetxController {
     //   getProfile();
     // }
 
-    await Get.toNamed(AppRoutes.Profile);
+    await Get.toNamed(AppRoutes.Profile, arguments: state.head_detail.value);
+  }
+
+  getProfile() async {
+    var Profile = await UserStore.to.profile;
+    state.head_detail.value = Profile;
+    state.head_detail.refresh();
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    getProfile();
+    // _snapshots();
   }
 }

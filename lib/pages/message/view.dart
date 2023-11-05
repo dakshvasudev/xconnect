@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -40,7 +41,22 @@ class MessagePage extends GetView<MessageController> {
                           image: AssetImage('assets/images/account_header.png'),
                           fit: BoxFit.fill,
                         )
-                      : Text('Hi'),
+                      : CachedNetworkImage(
+                          imageUrl: controller.state.head_detail.value.avatar!,
+                          height: 44,
+                          width: 44,
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(22)),
+                              image: DecorationImage(image: imageProvider, fit: BoxFit.fill
+                                  // colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+                                  ),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => const Image(
+                            image: AssetImage('assets/images/account_header.png'),
+                          ),
+                        ),
                 ),
               ),
               Positioned(
@@ -70,45 +86,47 @@ class MessagePage extends GetView<MessageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(children: [
-          CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                pinned: true,
-                title: _headBar(MediaQuery.of(context).size.width),
-              ),
-            ],
-          ),
-          Positioned(
-            right: 20,
-            bottom: 20,
-            height: 50,
-            width: 50,
-            child: GestureDetector(
-              child: Container(
-                  height: 50,
-                  width: 50,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryElement,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset: Offset(1, 1), // changes position of shadow
-                      ),
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                  ),
-                  child: Image.asset("assets/icons/contact.png")),
-              onTap: () {
-                Get.toNamed(AppRoutes.Contact);
-              },
+      body: Obx(
+        () => SafeArea(
+          child: Stack(children: [
+            CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  title: _headBar(MediaQuery.of(context).size.width),
+                ),
+              ],
             ),
-          )
-        ]),
+            Positioned(
+              right: 20,
+              bottom: 20,
+              height: 50,
+              width: 50,
+              child: GestureDetector(
+                child: Container(
+                    height: 50,
+                    width: 50,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryElement,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          offset: Offset(1, 1), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                    child: Image.asset("assets/icons/contact.png")),
+                onTap: () {
+                  Get.toNamed(AppRoutes.Contact);
+                },
+              ),
+            )
+          ]),
+        ),
       ),
     );
   }
