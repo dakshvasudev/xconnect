@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:x_connect/common/apis/apis.dart';
 import 'package:x_connect/common/entities/entities.dart';
 import 'package:x_connect/common/routes/names.dart';
@@ -10,11 +13,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:x_connect/firebase_options.dart';
 
 class FirebaseMassagingHandler {
   FirebaseMassagingHandler._();
-  static AndroidNotificationChannel channel_call =
-      const AndroidNotificationChannel(
+  static AndroidNotificationChannel channel_call = const AndroidNotificationChannel(
     'com.dbestech.x_connect.call', // id
     'chatty_call', // title
     importance: Importance.max,
@@ -22,8 +25,7 @@ class FirebaseMassagingHandler {
     playSound: true,
     sound: RawResourceAndroidNotificationSound('alert'),
   );
-  static AndroidNotificationChannel channel_message =
-      const AndroidNotificationChannel(
+  static AndroidNotificationChannel channel_message = const AndroidNotificationChannel(
     'com.dbestech.x_connect.message', // id
     'chatty_message', // title
     importance: Importance.defaultImportance,
@@ -32,8 +34,7 @@ class FirebaseMassagingHandler {
     // sound: RawResourceAndroidNotificationSound('alert'),
   );
 
-  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static Future<void> config() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -49,26 +50,21 @@ class FirebaseMassagingHandler {
         provisional: false,
       );
 
-      RemoteMessage? initialMessage =
-          await FirebaseMessaging.instance.getInitialMessage();
+      RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
       if (initialMessage != null) {
         print("initialMessage------");
         print(initialMessage);
       }
-      var initializationSettingsAndroid =
-          const AndroidInitializationSettings("ic_launcher");
+      var initializationSettingsAndroid = const AndroidInitializationSettings("ic_launcher");
       var darwinInitializationSettings = const DarwinInitializationSettings();
-      var initializationSettings = InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: darwinInitializationSettings);
-      flutterLocalNotificationsPlugin.initialize(initializationSettings,
-          onDidReceiveNotificationResponse: (value) {
+      var initializationSettings =
+          InitializationSettings(android: initializationSettingsAndroid, iOS: darwinInitializationSettings);
+      flutterLocalNotificationsPlugin.initialize(initializationSettings, onDidReceiveNotificationResponse: (value) {
         print("----------onDidReceiveNotificationResponse");
       });
 
       await FirebaseMessaging.instance
-          .setForegroundNotificationPresentationOptions(
-              alert: true, badge: true, sound: true);
+          .setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
 
       FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
         print("\n notification on onMessage function \n");
@@ -98,8 +94,7 @@ class FirebaseMassagingHandler {
                 height: 40.w,
                 padding: EdgeInsets.all(0.w),
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.fill, image: NetworkImage(toAvatar)),
+                  image: DecorationImage(fit: BoxFit.fill, image: NetworkImage(toAvatar)),
                   borderRadius: BorderRadius.all(Radius.circular(20.w)),
                 ),
               ),
@@ -119,12 +114,7 @@ class FirebaseMassagingHandler {
                               if (Get.isSnackbarOpen) {
                                 Get.closeAllSnackbars();
                               }
-                              FirebaseMassagingHandler._sendNotifications(
-                                  "cancel",
-                                  toToken,
-                                  toAvatar,
-                                  toName,
-                                  docId);
+                              FirebaseMassagingHandler._sendNotifications("cancel", toToken, toAvatar, toName, docId);
                             },
                             child: Container(
                               width: 40.w,
@@ -132,8 +122,7 @@ class FirebaseMassagingHandler {
                               padding: EdgeInsets.all(10.w),
                               decoration: BoxDecoration(
                                 color: AppColors.primaryElementBg,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30.w)),
+                                borderRadius: BorderRadius.all(Radius.circular(30.w)),
                               ),
                               child: Image.asset("assets/icons/a_phone.png"),
                             ),
@@ -157,11 +146,9 @@ class FirebaseMassagingHandler {
                                 padding: EdgeInsets.all(10.w),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryElementStatus,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.w)),
+                                  borderRadius: BorderRadius.all(Radius.circular(30.w)),
                                 ),
-                                child:
-                                    Image.asset("assets/icons/a_telephone.png"),
+                                child: Image.asset("assets/icons/a_telephone.png"),
                               ))
                         ],
                       ))));
@@ -183,8 +170,7 @@ class FirebaseMassagingHandler {
                 height: 40.w,
                 padding: EdgeInsets.all(0.w),
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.fill, image: NetworkImage(toAvatar)),
+                  image: DecorationImage(fit: BoxFit.fill, image: NetworkImage(toAvatar)),
                   borderRadius: BorderRadius.all(Radius.circular(20.w)),
                 ),
               ),
@@ -204,12 +190,7 @@ class FirebaseMassagingHandler {
                               if (Get.isSnackbarOpen) {
                                 Get.closeAllSnackbars();
                               }
-                              FirebaseMassagingHandler._sendNotifications(
-                                  "cancel",
-                                  toToken,
-                                  toAvatar,
-                                  toName,
-                                  docId);
+                              FirebaseMassagingHandler._sendNotifications("cancel", toToken, toAvatar, toName, docId);
                             },
                             child: Container(
                               width: 40.w,
@@ -217,8 +198,7 @@ class FirebaseMassagingHandler {
                               padding: EdgeInsets.all(10.w),
                               decoration: BoxDecoration(
                                 color: AppColors.primaryElementBg,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30.w)),
+                                borderRadius: BorderRadius.all(Radius.circular(30.w)),
                               ),
                               child: Image.asset("assets/icons/a_phone.png"),
                             ),
@@ -242,11 +222,9 @@ class FirebaseMassagingHandler {
                                 padding: EdgeInsets.all(10.w),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryElementStatus,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.w)),
+                                  borderRadius: BorderRadius.all(Radius.circular(30.w)),
                                 ),
-                                child:
-                                    Image.asset("assets/icons/a_telephone.png"),
+                                child: Image.asset("assets/icons/a_telephone.png"),
                               ))
                         ],
                       ))));
@@ -258,8 +236,7 @@ class FirebaseMassagingHandler {
           Get.closeAllSnackbars();
         }
 
-        if (Get.currentRoute.contains(AppRoutes.VoiceCall) ||
-            Get.currentRoute.contains(AppRoutes.VideoCall)) {
+        if (Get.currentRoute.contains(AppRoutes.VoiceCall) || Get.currentRoute.contains(AppRoutes.VideoCall)) {
           Get.back();
         }
 
@@ -269,8 +246,8 @@ class FirebaseMassagingHandler {
     }
   }
 
-  static Future<void> _sendNotifications(String callType, String toToken,
-      String toAvatar, String toName, String docId) async {
+  static Future<void> _sendNotifications(
+      String callType, String toToken, String toAvatar, String toName, String docId) async {
     CallRequestEntity callRequestEntity = CallRequestEntity();
     callRequestEntity.call_type = callType;
     callRequestEntity.to_token = toToken;
@@ -293,8 +270,7 @@ class FirebaseMassagingHandler {
     AndroidNotification? androidNotification = message.notification!.android;
     AppleNotification? appleNotification = message.notification!.apple;
 
-    if (notification != null &&
-        (androidNotification != null || appleNotification != null)) {
+    if (notification != null && (androidNotification != null || appleNotification != null)) {
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
@@ -322,44 +298,38 @@ class FirebaseMassagingHandler {
     }
     // PlascoRequests().initReport();
   }
-/*
+
   @pragma('vm:entry-point')
   static Future<void> firebaseMessagingBackground(RemoteMessage message) async {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     print("message data: ${message.data}");
     print("message data: ${message}");
     print("message data: ${message.notification}");
 
-    if(message!=null){
-      if(message.data!=null && message.data["call_type"]!=null) {
-
-        if(message.data["call_type"]=="cancel"){
-            FirebaseMassagingHandler.flutterLocalNotificationsPlugin.cancelAll();
+    if (message != null) {
+      if (message.data != null && message.data["call_type"] != null) {
+        if (message.data["call_type"] == "cancel") {
+          FirebaseMassagingHandler.flutterLocalNotificationsPlugin.cancelAll();
           //  await setCallVocieOrVideo(false);
-            var _prefs = await SharedPreferences.getInstance();
-            await _prefs.setString("CallVocieOrVideo", "");
+          var _prefs = await SharedPreferences.getInstance();
+          await _prefs.setString("CallVocieOrVideo", "");
         }
-        if(message.data["call_type"]=="voice" || message.data["call_type"]=="video"){
-
+        if (message.data["call_type"] == "voice" || message.data["call_type"] == "video") {
           var data = {
-            "to_token":message.data["token"],
-            "to_name":message.data["name"],
-            "to_avatar":message.data["avatar"],
-            "doc_id":message.data["doc_id"]??"",
-            "call_type":message.data["call_type"],
-            "expire_time":DateTime.now().toString(),
+            "to_token": message.data["token"],
+            "to_name": message.data["name"],
+            "to_avatar": message.data["avatar"],
+            "doc_id": message.data["doc_id"] ?? "",
+            "call_type": message.data["call_type"],
+            "expire_time": DateTime.now().toString(),
           };
           print(data);
           var _prefs = await SharedPreferences.getInstance();
           await _prefs.setString("CallVocieOrVideo", jsonEncode(data));
         }
-
-
       }
-
-
-
     }
-
-  }*/
+  }
 }

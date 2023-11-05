@@ -36,7 +36,6 @@ class VoiceCallController extends GetxController {
     state.to_avatar.value = data["to_avatar"] ?? "";
     state.call_role.value = data["call_role"] ?? "";
     state.doc_id.value = data["doc_id"] ?? "";
-
     _initEngine();
   }
 
@@ -124,15 +123,16 @@ class VoiceCallController extends GetxController {
     callRequestEntity.doc_id = state.doc_id.value;
     callRequestEntity.to_name = state.to_name.value;
     print('------the other user\'s token is ${state.to_token.value}');
-    // var res = await ChatAPI.call_notifications(params: callRequestEntity);
-    // print(res);
-    // if (res.code == 0) {
-    //   print("sendNotifications success");
-    // } else {
-    //   print("could not send notification");
-    //   // Get.snackbar("Tips", "Notification error!");
-    //   // Get.offAllNamed(AppRoutes.Message);
-    // }
+    var res = await ChatAPI.call_notifications(params: callRequestEntity);
+    print('---------res---------');
+    print(res);
+    if (res.code == 0) {
+      print("sendNotifications success");
+    } else {
+      print("could not send notification");
+      // Get.snackbar("Tips", "Notification error!");
+      // Get.offAllNamed(AppRoutes.Message);
+    }
   }
 
   Future<String> getToken() async {
