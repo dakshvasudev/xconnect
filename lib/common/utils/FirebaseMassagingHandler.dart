@@ -39,7 +39,7 @@ class FirebaseMassagingHandler {
   static Future<void> config() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     try {
-      RemoteMessage newMessage = const RemoteMessage();
+      // RemoteMessage newMessage = const RemoteMessage();
       await messaging.requestPermission(
         sound: true,
         badge: true,
@@ -90,12 +90,12 @@ class FirebaseMassagingHandler {
         if (toToken != null && toName != null && toAvatar != null) {
           Get.snackbar(
               icon: Container(
-                width: 40.w,
-                height: 40.w,
-                padding: EdgeInsets.all(0.w),
+                width: 40,
+                height: 40,
+                padding: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   image: DecorationImage(fit: BoxFit.fill, image: NetworkImage(toAvatar)),
-                  borderRadius: BorderRadius.all(Radius.circular(20.w)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
               ),
               "$toName",
@@ -105,7 +105,7 @@ class FirebaseMassagingHandler {
               mainButton: TextButton(
                   onPressed: () {},
                   child: SizedBox(
-                      width: 90.w,
+                      width: 90,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -117,12 +117,12 @@ class FirebaseMassagingHandler {
                               FirebaseMassagingHandler._sendNotifications("cancel", toToken, toAvatar, toName, docId);
                             },
                             child: Container(
-                              width: 40.w,
-                              height: 40.w,
-                              padding: EdgeInsets.all(10.w),
-                              decoration: BoxDecoration(
+                              width: 40,
+                              height: 40,
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
                                 color: AppColors.primaryElementBg,
-                                borderRadius: BorderRadius.all(Radius.circular(30.w)),
+                                borderRadius: BorderRadius.all(Radius.circular(30)),
                               ),
                               child: Image.asset("assets/icons/a_phone.png"),
                             ),
@@ -141,12 +141,12 @@ class FirebaseMassagingHandler {
                                 });
                               },
                               child: Container(
-                                width: 40.w,
-                                height: 40.w,
-                                padding: EdgeInsets.all(10.w),
-                                decoration: BoxDecoration(
+                                width: 40,
+                                height: 40,
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
                                   color: AppColors.primaryElementStatus,
-                                  borderRadius: BorderRadius.all(Radius.circular(30.w)),
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
                                 child: Image.asset("assets/icons/a_telephone.png"),
                               ))
@@ -166,12 +166,12 @@ class FirebaseMassagingHandler {
           ConfigStore.to.isCallVocie = true;
           Get.snackbar(
               icon: Container(
-                width: 40.w,
-                height: 40.w,
-                padding: EdgeInsets.all(0.w),
+                width: 40,
+                height: 40,
+                padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   image: DecorationImage(fit: BoxFit.fill, image: NetworkImage(toAvatar)),
-                  borderRadius: BorderRadius.all(Radius.circular(20.w)),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
               ),
               "$toName",
@@ -181,7 +181,7 @@ class FirebaseMassagingHandler {
               mainButton: TextButton(
                   onPressed: () {},
                   child: SizedBox(
-                      width: 90.w,
+                      width: 90,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -193,12 +193,12 @@ class FirebaseMassagingHandler {
                               FirebaseMassagingHandler._sendNotifications("cancel", toToken, toAvatar, toName, docId);
                             },
                             child: Container(
-                              width: 40.w,
-                              height: 40.w,
-                              padding: EdgeInsets.all(10.w),
-                              decoration: BoxDecoration(
+                              width: 40,
+                              height: 40,
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
                                 color: AppColors.primaryElementBg,
-                                borderRadius: BorderRadius.all(Radius.circular(30.w)),
+                                borderRadius: BorderRadius.all(Radius.circular(30)),
                               ),
                               child: Image.asset("assets/icons/a_phone.png"),
                             ),
@@ -217,12 +217,12 @@ class FirebaseMassagingHandler {
                                 });
                               },
                               child: Container(
-                                width: 40.w,
-                                height: 40.w,
-                                padding: EdgeInsets.all(10.w),
-                                decoration: BoxDecoration(
+                                width: 40,
+                                height: 40,
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
                                   color: AppColors.primaryElementStatus,
-                                  borderRadius: BorderRadius.all(Radius.circular(30.w)),
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
                                 child: Image.asset("assets/icons/a_telephone.png"),
                               ))
