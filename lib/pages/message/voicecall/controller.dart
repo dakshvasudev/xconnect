@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:x_connect/common/apis/chat.dart';
+import 'package:x_connect/common/entities/chat.dart';
 import 'package:x_connect/common/store/user.dart';
 import 'package:x_connect/common/values/server.dart';
 import 'package:x_connect/pages/message/voicecall/index.dart';
@@ -105,26 +110,43 @@ class VoiceCallController extends GetxController {
     );
     // // is anchor joinChannel
     await joinChannel();
-    // if (state.call_role == "anchor") {
-    //   await sendNotifications("voice");
-    //   await player.play();
-    // }
+    if (state.call_role == "anchor") {
+      // await sendNotifications("voice");
+      await player.play();
+    }
+  }
+
+  Future<String> getToken() async {
+    if (state.call_role == "anchor") {
+      state.channelId.value = md5.convert(utf8.encode("${profile_token}_${state.to_token}")).toString();
+    } else {
+      state.channelId.value = md5.convert(utf8.encode("${state.to_token}_${profile_token}")).toString();
+    }
+    CallTokenRequestEntity callTokenRequestEntity = new CallTokenRequestEntity();
+    callTokenRequestEntity.channel_name = state.channelId.value;
+    print('-------channel id is ${state.channelId.value}');
+    print('-------my access token is ${UserStore.to.token}');
+    var res = await ChatAPI.call_token(params: callTokenRequestEntity);
+    if (res.code == 0) {
+      return res.data!;
+    }
+    return "";
   }
 
   joinChannel() async {
     await Permission.microphone.request();
 
     EasyLoading.show(indicator: CircularProgressIndicator(), maskType: EasyLoadingMaskType.clear, dismissOnTap: true);
-    // String token = await getToken();
-    // if (token.isEmpty) {
-    //   EasyLoading.dismiss();
-    //   Get.back();
-    //   return;
-    // }
+    String token = await getToken();
+    if (token.isEmpty) {
+      EasyLoading.dismiss();
+      Get.back();
+      return;
+    }
+
     await engine.joinChannel(
-        token:
-            "007eJxTYLh+a4+x4ToelgkLSlfrT/+8PVDs5/Mdp84uYqg8cc6fL5lJgcEkzdLQwszc0sTC0NTE1CQ1ydw01czUyNLMMNnQwNjImPO7a2pDICPDRgYWFkYGCATx+RgqkvPz8lKTS3RL8rNT8xgYAIZ0IeQ=",
-        channelId: "xconnect-token",
+        token: token,
+        channelId: state.channelId.value,
         uid: 0,
         options: ChannelMediaOptions(
           channelProfile: channelProfileType,
