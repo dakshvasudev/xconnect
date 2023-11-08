@@ -122,12 +122,12 @@ class ChatPage extends GetView<ChatController> {
                               Container(
                                 width: 220,
                                 constraints: const BoxConstraints(maxHeight: 150, minHeight: 20),
-                                child: const TextField(
+                                child: TextField(
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
-                                  // controller: controller.myinputController,
+                                  controller: controller.myinputController,
                                   autofocus: false,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     hintText: "Message...",
                                     isDense: true,
                                     contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
@@ -164,7 +164,7 @@ class ChatPage extends GetView<ChatController> {
                                   child: Image.asset("assets/icons/send.png"),
                                 ),
                                 onTap: () {
-                                  // controller.sendMessage();
+                                  controller.sendMessage();
                                 },
                               )
                             ])),
