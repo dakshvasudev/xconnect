@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:x_connect/common/entities/msg.dart';
 import 'package:x_connect/common/entities/msgcontent.dart';
 import 'package:x_connect/common/routes/names.dart';
 import 'package:x_connect/common/store/user.dart';
@@ -71,30 +72,30 @@ class ChatController extends GetxController {
       print('DocumentSnapshot added with ID: ${doc.id}');
       myinputController.clear();
     });
-    // var message_res = await db
-    //     .collection("message")
-    //     .doc(doc_id)
-    //     .withConverter(
-    //       fromFirestore: Msg.fromFirestore,
-    //       toFirestore: (Msg msg, options) => msg.toFirestore(),
-    //     )
-    //     .get();
-    // if (message_res.data() != null) {
-    //   var item = message_res.data()!;
-    //   int to_msg_num = item.to_msg_num == null ? 0 : item.to_msg_num!;
-    //   int from_msg_num = item.from_msg_num == null ? 0 : item.from_msg_num!;
-    //   if (item.from_token == token) {
-    //     from_msg_num = from_msg_num + 1;
-    //   } else {
-    //     to_msg_num = to_msg_num + 1;
-    //   }
-    //   await db.collection("message").doc(doc_id).update({
-    //     "to_msg_num": to_msg_num,
-    //     "from_msg_num": from_msg_num,
-    //     "last_msg": sendcontent,
-    //     "last_time": Timestamp.now()
-    //   });
-    // }
+    var message_result = await db
+        .collection("message")
+        .doc(doc_id)
+        .withConverter(
+          fromFirestore: Msg.fromFirestore,
+          toFirestore: (Msg msg, options) => msg.toFirestore(),
+        )
+        .get();
+    if (message_result.data() != null) {
+      var item = message_result.data()!;
+      int to_msg_num = item.to_msg_num == null ? 0 : item.to_msg_num!;
+      int from_msg_num = item.from_msg_num == null ? 0 : item.from_msg_num!;
+      if (item.from_token == token) {
+        from_msg_num = from_msg_num + 1;
+      } else {
+        to_msg_num = to_msg_num + 1;
+      }
+      await db.collection("message").doc(doc_id).update({
+        "to_msg_num": to_msg_num,
+        "from_msg_num": from_msg_num,
+        "last_msg": sendcontent,
+        "last_time": Timestamp.now()
+      });
+    }
     // sendNotifications("text");
   }
 }
