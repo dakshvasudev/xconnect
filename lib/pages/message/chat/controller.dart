@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:x_connect/common/entities/msg.dart';
 import 'package:x_connect/common/entities/msgcontent.dart';
@@ -14,6 +15,9 @@ class ChatController extends GetxController {
   final token = UserStore.to.profile.token;
   final state = ChatState();
   final db = FirebaseFirestore.instance;
+  ScrollController myscrollController = new ScrollController();
+  var listener;
+  bool isloadmore = true;
 
   late String doc_id;
   goMore() {
@@ -97,5 +101,80 @@ class ChatController extends GetxController {
       });
     }
     // sendNotifications("text");
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    print("onReady------------");
+    state.msgcontentList.clear();
+    final messages = db
+        .collection("message")
+        .doc(doc_id)
+        .collection("msglist")
+        .withConverter(
+          fromFirestore: Msgcontent.fromFirestore,
+          toFirestore: (Msgcontent msg, options) => msg.toFirestore(),
+        )
+        .orderBy("addtime", descending: true)
+        .limit(15);
+
+    listener = messages.snapshots().listen((event) {
+      print("current data: ${event.docs}");
+      print("current data: ${event.metadata.hasPendingWrites}");
+      List<Msgcontent> tempMsgList = <Msgcontent>[];
+      for (var change in event.docChanges) {
+        switch (change.type) {
+          case DocumentChangeType.added:
+            print("added----: ${change.doc.data()}");
+            if (change.doc.data() != null) {
+              tempMsgList.add(change.doc.data()!);
+            }
+            break;
+          case DocumentChangeType.modified:
+            print("Modified City: ${change.doc.data()}");
+            break;
+          case DocumentChangeType.removed:
+            print("Removed City: ${change.doc.data()}");
+            break;
+        }
+      }
+      tempMsgList.reversed.forEach((element) {
+        state.msgcontentList.value.insert(0, element);
+      });
+      state.msgcontentList.refresh();
+
+      //     SchedulerBinding.instance.addPostFrameCallback((_) {
+      //       if (myscrollController.hasClients) {
+      //         myscrollController.animateTo(
+      //           myscrollController.position.minScrollExtent,
+      //           duration: const Duration(milliseconds: 300),
+      //           curve: Curves.easeOut,
+      //         );
+      //       }
+      //     });
+      //   },
+      //   onError: (error) => print("Listen failed: $error"),
+      // );
+      //
+      // myscrollController.addListener(() {
+      //   // print(myscrollController.offset);
+      //   //  print(myscrollController.position.maxScrollExtent);
+      //   if ((myscrollController.offset + 10) > myscrollController.position.maxScrollExtent) {
+      //     if (isloadmore) {
+      //       state.isloading.value = true;
+      //       isloadmore = false;
+      //       asyncLoadMoreData(state.msgcontentList.length);
+      //     }
+      //   }
+    });
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    print("onClose-------");
+    // clear_msg_num(doc_id);
+    myinputController.dispose();
   }
 }

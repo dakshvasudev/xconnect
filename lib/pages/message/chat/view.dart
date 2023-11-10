@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:x_connect/common/values/values.dart';
 import 'package:x_connect/pages/message/chat/controller.dart';
+import 'package:x_connect/pages/widgets/chat_list.dart';
 
 class ChatPage extends GetView<ChatController> {
   const ChatPage({super.key});
@@ -98,7 +99,7 @@ class ChatPage extends GetView<ChatController> {
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                // ChatList(),
+                ChatList(),
                 Positioned(
                   bottom: 0,
                   child: Container(
@@ -195,7 +196,6 @@ class ChatPage extends GetView<ChatController> {
                     ),
                   ),
                 ),
-
                 controller.state.more_status.value
                     ? Positioned(
                         right: 20,
